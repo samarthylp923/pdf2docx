@@ -6,7 +6,7 @@ This module provides functionality to convert PDF files to DOCX format.
 
 import os
 from pathlib import Path
-from typing import Union, Optional
+from typing import Union, Optional, List
 from pdf2docx import Converter
 
 
@@ -68,9 +68,9 @@ class PDFConverter:
     
     def convert_batch(
         self,
-        pdf_files: list[Union[str, Path]],
+        pdf_files: List[Union[str, Path]],
         output_dir: Optional[Union[str, Path]] = None
-    ) -> list[str]:
+    ) -> List[str]:
         """
         Convert multiple PDF files to DOCX format.
         

@@ -1,14 +1,27 @@
 """
 Create a simple test PDF file for testing the converter.
+
+Note: This script requires reportlab to be installed.
+Install with: pip install reportlab
 """
 
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
-from reportlab.lib.units import inch
+try:
+    from reportlab.lib.pagesizes import letter
+    from reportlab.pdfgen import canvas
+    from reportlab.lib.units import inch
+    REPORTLAB_AVAILABLE = True
+except ImportError:
+    REPORTLAB_AVAILABLE = False
 
 
 def create_test_pdf(filename="test_sample.pdf"):
     """Create a simple test PDF file."""
+    if not REPORTLAB_AVAILABLE:
+        raise ImportError(
+            "reportlab is required to create test PDFs. "
+            "Install with: pip install reportlab"
+        )
+    
     c = canvas.Canvas(filename, pagesize=letter)
     width, height = letter
     
@@ -42,8 +55,11 @@ def create_test_pdf(filename="test_sample.pdf"):
 
 
 if __name__ == "__main__":
-    try:
-        create_test_pdf()
-    except ImportError:
+    if not REPORTLAB_AVAILABLE:
         print("Note: reportlab is not installed. Skipping test PDF creation.")
         print("Install with: pip install reportlab")
+    else:
+        try:
+            create_test_pdf()
+        except Exception as e:
+            print(f"Error creating test PDF: {e}")

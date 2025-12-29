@@ -1,3 +1,6 @@
 pdf2docx>=0.5.6
 python-docx>=0.8.11
 PyMuPDF>=1.23.0
+
+# Optional: For creating test PDFs
+# reportlab>=4.0.0

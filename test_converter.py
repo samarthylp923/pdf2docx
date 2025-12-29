@@ -6,6 +6,7 @@ import os
 import sys
 from pathlib import Path
 from converter import PDFConverter, convert_pdf_to_docx
+from create_test_pdf import create_test_pdf
 
 
 def test_basic_conversion():
@@ -15,7 +16,6 @@ def test_basic_conversion():
     
     try:
         # Create a test PDF first
-        from create_test_pdf import create_test_pdf
         test_pdf = "test_basic.pdf"
         create_test_pdf(test_pdf)
         
@@ -43,7 +43,6 @@ def test_custom_output():
     print("-" * 50)
     
     try:
-        from create_test_pdf import create_test_pdf
         test_pdf = "test_custom.pdf"
         output_docx = "custom_output.docx"
         create_test_pdf(test_pdf)
@@ -103,7 +102,7 @@ def test_invalid_file_type():
         print(f"✗ Failed: Unexpected error: {e}")
         try:
             os.remove(test_file)
-        except:
+        except (FileNotFoundError, OSError):
             pass
         return False
 
